@@ -9,15 +9,11 @@ class StringCalc {
       }
 
       if (numbers.startsWith('//[')) {
-        // Extract multi-character delimiter
         String customDelimiter = numbers.substring(3, delimiterEndIndex - 1);
-        delimiter =
-            RegExp.escape(customDelimiter); // Escape the delimiter for regex
+        delimiter = RegExp.escape(customDelimiter);
       } else {
-        // Extract single-character delimiter
         String customDelimiter = numbers.substring(2, delimiterEndIndex);
-        delimiter =
-            RegExp.escape(customDelimiter); // Escape the delimiter for regex
+        delimiter = RegExp.escape(customDelimiter);
       }
       numbers = numbers.substring(delimiterEndIndex + 1);
     }
@@ -34,7 +30,7 @@ class StringCalc {
         .where((n) => n.isNotEmpty)
         .map((n) => n.trim())
         .toList();
-    print("numberStrings: $numberStrings $delimiter $cleanedInput");
+
     List<String> negativeNumbers = [];
     List<int> validNumbers = [];
     for (String number in numberStrings) {
