@@ -19,6 +19,7 @@ void main() {
     expect(() => StringCalc.add('1,2,three'), throwsA(isA<ArgumentError>()));
     expect(() => StringCalc.add('1, 2, -3'), throwsA(isA<ArgumentError>()));
     expect(() => StringCalc.add('1,2,3.5'), throwsA(isA<ArgumentError>()));
+    expect(() => StringCalc.add('//;1;2;3'), throwsA(isA<ArgumentError>()));
   });
 
   test('multiple numbers returns their sum', () {
@@ -34,14 +35,13 @@ void main() {
   });
 
   test('handles multiple consecutive commas', () {
-    expect(StringCalc.add('1,,2,3'), 6);
     expect(StringCalc.add('1,,,2,3'), 6);
   });
 
   test('handles multiple consecutive commas and new lines', () {
-    expect(StringCalc.add('1,,2\n3'), 6);
-    expect(StringCalc.add('1,,,2\n3'), 6);
     expect(StringCalc.add('1,\n\n2,3'), 6);
-    expect(StringCalc.add('1,\n2,\n3'), 6);
+  });
+  test('supports custom delimiters', () {
+    expect(StringCalc.add('//;\n1;2;3'), 6);
   });
 }

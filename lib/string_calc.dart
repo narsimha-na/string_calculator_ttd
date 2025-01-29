@@ -1,5 +1,16 @@
 class StringCalc {
   static int add(String numbers) {
+    String delimiter = ',|\n';
+
+    if (numbers.startsWith('//')) {
+      int delimiterEndIndex = numbers.indexOf('\n');
+      if (delimiterEndIndex == -1) {
+        throw ArgumentError("Invalid input format");
+      }
+      delimiter = RegExp.escape(numbers.substring(2, delimiterEndIndex));
+      numbers = numbers.substring(delimiterEndIndex + 1);
+    }
+
     String cleanedInput = numbers.replaceAll('\n', ',');
     cleanedInput = cleanedInput.replaceAll(RegExp(r'\s+'), '');
 
@@ -7,11 +18,17 @@ class StringCalc {
       return 0;
     }
 
-    if (!RegExp(r'^[0-9,]*$').hasMatch(cleanedInput)) {
-      throw ArgumentError("Input must contain only numbers and commas");
+    List<String> numberStrings = cleanedInput
+        .split(RegExp(delimiter))
+        .where((n) => n.isNotEmpty)
+        .map((n) => n.trim())
+        .toList();
+
+    for (String number in numberStrings) {
+      if (!RegExp(r'^\d+$').hasMatch(number)) {
+        throw ArgumentError("Input must contain only numbers");
+      }
     }
-    List<String> numberStrings =
-        cleanedInput.split(',').where((n) => n.isNotEmpty).toList();
 
     List<int> numberList = numberStrings.map(int.parse).toList();
 
