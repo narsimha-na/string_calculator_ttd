@@ -25,6 +25,7 @@ class StringCalc {
         .toList();
 
     List<String> negativeNumbers = [];
+    List<int> validNumbers = [];
     for (String number in numberStrings) {
       if (!RegExp(r'^-?\d+$').hasMatch(number)) {
         throw ArgumentError("Input must contain only numbers");
@@ -32,6 +33,8 @@ class StringCalc {
       int num = int.parse(number);
       if (num < 0) {
         negativeNumbers.add(number);
+      } else if (num <= 1000) {
+        validNumbers.add(num);
       }
     }
 
@@ -40,8 +43,6 @@ class StringCalc {
           "Negatives not allowed: ${negativeNumbers.join(', ')}");
     }
 
-    List<int> numberList = numberStrings.map(int.parse).toList();
-
-    return numberList.reduce((a, b) => a + b);
+    return validNumbers.reduce((a, b) => a + b);
   }
 }

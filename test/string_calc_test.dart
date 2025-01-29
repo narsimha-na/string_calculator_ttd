@@ -27,7 +27,7 @@ void main() {
   });
 
   test('handles large numbers', () {
-    expect(StringCalc.add('1000,2000,3000'), 6000);
+    expect(StringCalc.add('1000,2000,3000'), 1000);
   });
 
   test('handles numbers with leading/trailing spaces', () {
@@ -55,5 +55,11 @@ void main() {
         throwsA(predicate((e) =>
             e is ArgumentError &&
             e.message == "Negatives not allowed: -2, -4")));
+  });
+
+  test('ignores numbers greater than 1000', () {
+    expect(StringCalc.add('2,1001'), 2);
+    expect(StringCalc.add('1000,1001,2'), 1002);
+    expect(StringCalc.add('//;\n1000;1001;2'), 1002);
   });
 }
