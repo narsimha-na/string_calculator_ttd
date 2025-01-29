@@ -24,10 +24,20 @@ class StringCalc {
         .map((n) => n.trim())
         .toList();
 
+    List<String> negativeNumbers = [];
     for (String number in numberStrings) {
-      if (!RegExp(r'^\d+$').hasMatch(number)) {
+      if (!RegExp(r'^-?\d+$').hasMatch(number)) {
         throw ArgumentError("Input must contain only numbers");
       }
+      int num = int.parse(number);
+      if (num < 0) {
+        negativeNumbers.add(number);
+      }
+    }
+
+    if (negativeNumbers.isNotEmpty) {
+      throw ArgumentError(
+          "Negatives not allowed: ${negativeNumbers.join(', ')}");
     }
 
     List<int> numberList = numberStrings.map(int.parse).toList();

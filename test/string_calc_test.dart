@@ -44,4 +44,16 @@ void main() {
   test('supports custom delimiters', () {
     expect(StringCalc.add('//;\n1;2;3'), 6);
   });
+
+  test('throws ArgumentError for negative numbers', () {
+    expect(
+        () => StringCalc.add('1,-2,3'),
+        throwsA(predicate((e) =>
+            e is ArgumentError && e.message == "Negatives not allowed: -2")));
+    expect(
+        () => StringCalc.add('//;\n1;-2;3;-4'),
+        throwsA(predicate((e) =>
+            e is ArgumentError &&
+            e.message == "Negatives not allowed: -2, -4")));
+  });
 }
