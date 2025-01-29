@@ -9,8 +9,9 @@ class StringCalc {
       }
 
       if (numbers.startsWith('//[')) {
-        String customDelimiter = numbers.substring(3, delimiterEndIndex - 1);
-        delimiter = RegExp.escape(customDelimiter);
+        String delimiters = numbers.substring(3, delimiterEndIndex - 1);
+        List<String> delimiterList = delimiters.split('][');
+        delimiter = delimiterList.map((d) => RegExp.escape(d)).join('|');
       } else {
         String customDelimiter = numbers.substring(2, delimiterEndIndex);
         delimiter = RegExp.escape(customDelimiter);

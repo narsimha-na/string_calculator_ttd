@@ -75,4 +75,9 @@ void main() {
     expect(() => StringCalc.add('//[***1***]\n2***3***4***5'),
         throwsA(isA<ArgumentError>()));
   });
+  test('supports multiple custom delimiters', () {
+    expect(StringCalc.add('//[*][%]\n1*2%3'), 6);
+    expect(StringCalc.add('//[;][%]\n1;2%3'), 6);
+    expect(StringCalc.add('//[delimiter][!]\n1delimiter2!3'), 6);
+  });
 }
