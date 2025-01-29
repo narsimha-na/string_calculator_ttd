@@ -20,4 +20,21 @@ void main() {
     expect(() => StringCalc.add('1, 2, -3'), throwsA(isA<ArgumentError>()));
     expect(() => StringCalc.add('1,2,3.5'), throwsA(isA<ArgumentError>()));
   });
+
+  test('multiple numbers returns their sum', () {
+    expect(StringCalc.add('1,2,3,4,5'), 15);
+  });
+
+  test('handles large numbers', () {
+    expect(StringCalc.add('1000,2000,3000'), 6000);
+  });
+
+  test('handles numbers with leading/trailing spaces', () {
+    expect(StringCalc.add(' 1, 2, 3 '), 6);
+  });
+
+  test('handles multiple consecutive commas', () {
+    expect(StringCalc.add('1,,2,3'), 6);
+    expect(StringCalc.add('1,,,2,3'), 6);
+  });
 }
