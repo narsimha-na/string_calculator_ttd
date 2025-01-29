@@ -62,4 +62,17 @@ void main() {
     expect(StringCalc.add('1000,1001,2'), 1002);
     expect(StringCalc.add('//;\n1000;1001;2'), 1002);
   });
+
+  test('supports multi-character custom delimiters', () {
+    expect(StringCalc.add('//[***]\n1***2***3'), 6);
+    expect(StringCalc.add('//[delimiter]\n1delimiter2delimiter3'), 6);
+    expect(StringCalc.add('//[!]\n1!2!3'), 6);
+    expect(StringCalc.add('//[abc]\n1abc2abc3'), 6);
+  });
+
+  test(' ArgumentError for invalid input format when delimiter is not closed',
+      () {
+    expect(() => StringCalc.add('//[***1***]\n2***3***4***5'),
+        throwsA(isA<ArgumentError>()));
+  });
 }
