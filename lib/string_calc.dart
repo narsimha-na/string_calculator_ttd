@@ -1,6 +1,7 @@
 class StringCalc {
   static int add(String numbers) {
-    String cleanedInput = numbers.replaceAll(RegExp(r'\s+'), '');
+    String cleanedInput = numbers.replaceAll('\n', ',');
+    cleanedInput = cleanedInput.replaceAll(RegExp(r'\s+'), '');
 
     if (cleanedInput.isEmpty) {
       return 0;
@@ -9,7 +10,6 @@ class StringCalc {
     if (!RegExp(r'^[0-9,]*$').hasMatch(cleanedInput)) {
       throw ArgumentError("Input must contain only numbers and commas");
     }
-
     List<String> numberStrings =
         cleanedInput.split(',').where((n) => n.isNotEmpty).toList();
 

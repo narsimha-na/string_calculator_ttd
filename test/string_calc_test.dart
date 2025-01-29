@@ -37,4 +37,11 @@ void main() {
     expect(StringCalc.add('1,,2,3'), 6);
     expect(StringCalc.add('1,,,2,3'), 6);
   });
+
+  test('handles multiple consecutive commas and new lines', () {
+    expect(StringCalc.add('1,,2\n3'), 6);
+    expect(StringCalc.add('1,,,2\n3'), 6);
+    expect(StringCalc.add('1,\n\n2,3'), 6);
+    expect(StringCalc.add('1,\n2,\n3'), 6);
+  });
 }
