@@ -1,4 +1,4 @@
-# String Calculator using TTD
+# String Calculator using TTD with all unit test cases
 
 A simple string calculator that can perform addition on numbers provided in a string format. The calculator supports custom delimiters, including both single-character and multi-character delimiters.
 
