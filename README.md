@@ -7,8 +7,7 @@ A simple string calculator that can perform addition on numbers provided in a st
 - Supports addition of numbers separated by commas, new lines, or custom delimiters.
 - Allows for single-character and multi-character delimiters.
 - Handles multiple custom delimiters in the format `//[delim1][delim2]\n`.
-- Throws errors for invalid inputs, including negative numbers and non-numeric values.
-
+- Throws errors for invalid inputs, including negative numbers and non-numeric values
 ## Test-Driven Development (TDD)
 
 This project was developed using traditional Test-Driven Development (TDD) principles. The development process involved writing tests before implementing the corresponding functionality. This approach ensures that the code meets the specified requirements and behaves as expected.
